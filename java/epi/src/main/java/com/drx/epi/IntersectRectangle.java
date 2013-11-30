@@ -2,6 +2,9 @@ package com.drx.epi;
 
 import java.util.Random;
 
+/**
+ * @author translated from c++ by Blazheev Alexander
+ */
 public class IntersectRectangle {
     // @include
     public static class Rectangle {

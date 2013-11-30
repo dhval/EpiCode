@@ -2,6 +2,9 @@ package com.drx.epi;
 
 import java.util.Random;
 
+/**
+ * @author translated from c++ by Blazheev Alexander
+ */
 public class ConvertBase {
     // @include
     public static String convert_base(String s, int b1, int b2) {

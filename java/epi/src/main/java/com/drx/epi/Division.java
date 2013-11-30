@@ -2,6 +2,9 @@ package com.drx.epi;
 
 import java.util.Random;
 
+/**
+ * @author translated from c++ by Blazheev Alexander
+ */
 public class Division {
     public static long divide_x_y_bsearch(long x, long y) {
         if (x < y) {

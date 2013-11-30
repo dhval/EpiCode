@@ -2,6 +2,9 @@ package com.drx.epi;
 
 import java.util.Random;
 
+/**
+ * @author translated from c++ by Blazheev Alexander
+ */
 public class MultiplyShiftAdd {
     // @include
     public static long add_no_operator(long a, long b) {

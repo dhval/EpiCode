@@ -3,6 +3,9 @@ package com.drx.epi;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * @author translated from c++ by Blazheev Alexander
+ */
 public class EliasCoding {
     // @include
     public static String trans_int_to_binary(int decimal) {

@@ -5,6 +5,9 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Random;
 
+/**
+ * @author translated from c++ by Blazheev Alexander
+ */
 public class PowerSetAlternative {
     // @include
     private static void generate_power_set_helper(ArrayList<Integer> S, int idx,

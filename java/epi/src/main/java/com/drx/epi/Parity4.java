@@ -1,5 +1,8 @@
 package com.drx.epi;
 
+/**
+ * @author translated from c++ by Blazheev Alexander
+ */
 public class Parity4 {
     // @include
     // The LSB of FOUR_BIT_PARITY_LOOKUP_TABLE is the parity of 0,

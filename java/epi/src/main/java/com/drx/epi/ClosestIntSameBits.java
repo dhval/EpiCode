@@ -2,6 +2,9 @@ package com.drx.epi;
 
 import java.util.Random;
 
+/**
+ * @author translated from c++ by Blazheev Alexander
+ */
 public class ClosestIntSameBits {
     public static int set_bit(int x, int bit, boolean set_value) {
         return set_value ? x | (1 << bit) : x & ~(1 << bit);

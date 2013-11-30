@@ -1,5 +1,8 @@
 package com.drx.epi;
 
+/**
+ * @author translated from c++ by Blazheev Alexander
+ */
 public class Parity3 {
     private static short precomputed_parity[];
 

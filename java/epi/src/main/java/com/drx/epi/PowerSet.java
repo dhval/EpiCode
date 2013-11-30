@@ -3,6 +3,9 @@ package com.drx.epi;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * @author translated from c++ by Blazheev Alexander
+ */
 public class PowerSet {
     // @include
     private static final double LOG_2 = Math.log(2);

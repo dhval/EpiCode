@@ -2,6 +2,9 @@ package com.drx.epi;
 
 import java.util.Random;
 
+/**
+ * @author translated from c++ by Blazheev Alexander
+ */
 public class SwapBits {
     // @include
     public static long swap_bits(long x, int i, int j) {

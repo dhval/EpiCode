@@ -2,6 +2,9 @@ package com.drx.epi;
 
 import java.util.Random;
 
+/**
+ * @author translated from c++ by Blazheev Alexander
+ */
 public class InterconvertingStringInteger {
     public static String rand_int_string(int len) {
         Random r = new Random();

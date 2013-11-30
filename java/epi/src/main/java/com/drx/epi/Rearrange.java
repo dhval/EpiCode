@@ -3,6 +3,9 @@ package com.drx.epi;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * @author translated from c++ by Blazheev Alexander
+ */
 public class Rearrange {
     // @include
     public static void rearrange(ArrayList<Integer> A) {
