@@ -1,7 +1,6 @@
 // Copyright (c) 2013 Elements of Programming Interviews. All rights reserved.
 package com.drx.epi;
 
-import static com.drx.epi.utils.Utils.fill;
 import static com.drx.epi.utils.Utils.iota;
 import static com.drx.epi.utils.Utils.shuffle;
 import static java.lang.Math.max;
@@ -36,7 +35,7 @@ public class Offline_minimum {
 	    pre = E[i] + 1;
 	  }
 
-	  int[] ret = new int[E.length]; fill(ret, -1);  // stores the answer
+	  int[] ret = new int[E.length]; Arrays.fill(ret, -1);  // stores the answer
 	  int[] set = new int[E.length + 1];  // the disjoint-set
 	  iota(set, 0, set.length, 0);  // initializes the disjoint-set
 	  for (int i = 0; i < A.length; ++i) {

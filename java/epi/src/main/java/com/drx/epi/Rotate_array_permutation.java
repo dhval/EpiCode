@@ -12,11 +12,9 @@ public class Rotate_array_permutation {
 		int hops = A.length / cycles; // number of elements in a cycle.
 
 		for (int c = 0; c < cycles; ++c) {
-			int temp = A[c];
-			for (int j = 1; j < hops; ++j) {
+			for (int j = 1; j <= hops; ++j) {
 				swap(A, (c + j * i) % A.length, c);
 			}
-			A[c] = temp;
 		}
 	}
 	// @exclude

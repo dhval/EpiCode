@@ -6,7 +6,7 @@ import java.util.Random;
 public class Rotate_array_test {
 	public static int[] rand_vector(int len) {
 		Random gen = new Random();
-		int[] ret = new int[len + 1];
+		int[] ret = new int[len];
 		while (len-- > 0) {
 			ret[len] = gen.nextInt(len + 1);
 		}
@@ -35,7 +35,7 @@ public class Rotate_array_test {
 			int[] B = Arrays.copyOf(A, A.length);
 			Rotate_array_permutation.rotate_array(B, i);
 			check_answer(A, i, B);
-
+			
 			int[] C = Arrays.copyOf(A, A.length);
 			Rotate_array.rotate_array(C, i);
 			check_answer(A, i, C);
