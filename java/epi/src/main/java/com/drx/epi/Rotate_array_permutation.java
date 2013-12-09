@@ -1,12 +1,12 @@
 // Copyright (c) 2013 Elements of Programming Interviews. All rights reserved.
 package com.drx.epi;
 
-import static com.drx.epi.GCD.*;
-import static com.drx.epi.utils.Utils.*;
+import static com.drx.epi.GCD.GCD;
+import static com.drx.epi.utils.Utils.swap;
 
 public class Rotate_array_permutation {
 	// @include
-	static void rotate_array(int[] A, int i) {
+	public static void rotate_array(int[] A, int i) {
 		i %= A.length;
 		int cycles = (int) GCD(A.length, i); // number of cycles in this rotation.
 		int hops = A.length / cycles; // number of elements in a cycle.
