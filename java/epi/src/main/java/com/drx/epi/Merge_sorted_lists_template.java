@@ -1,4 +1,8 @@
 // Copyright (c) 2013 Elements of Programming Interviews. All rights reserved.
+// @author Ivan Sharov
+
+package com.drx.epi;
+
 import java.util.Random;
 
 // used to implement pass-by-reference argument passing

@@ -1,4 +1,7 @@
 // Copyright (c) 2013 Elements of Programming Interviews. All rights reserved.
+// @author Andrey Pavlov
+
+package com.drx.epi;
 
 //import java.lang.IllegalArgumentException;
 import java.util.Random;

@@ -1,4 +1,7 @@
 // Copyright (c) 2013 Elements of Programming Interviews. All rights reserved.
+// @author Andrey Pavlov
+
+package com.drx.epi;
 
 class Palindrome_linked_list_template {
 
@@ -13,9 +16,9 @@ class Palindrome_linked_list_template {
         fast = fast.next; slow = slow.next;
       }
     }
-  
+
     // Compare the first half and reversed second half lists.
-    node_t<T> reverse = 
+    node_t<T> reverse =
             Reverse_linked_list_iterative_template.reverse_linked_list(slow);
     while (reverse != null && L != null) {
       if (reverse.data != L.data) {
@@ -37,7 +40,7 @@ class Palindrome_linked_list_template {
 
   public static void main(String[] argv) {
     node_t<Integer> head = null;
-    
+
     if (argv.length > 1) {
       //Input the node's value in reverse order.
       for (int i = 0; i < argv.length; i++) {
@@ -54,14 +57,14 @@ class Palindrome_linked_list_template {
         head = curr;
       }
       assert(is_linked_list_a_palindrome(head) == true);
-      
+
       // Still a palindrome linked list.
       head = null;
       for (int i = 5; i >= 1; --i) {
         node_t<Integer> curr =
             new node_t<Integer>(1, head);
         head = curr;
-      }      
+      }
       head.next.next.data = 3;
       assert(is_linked_list_a_palindrome(head) == true);
       // Not a palindrome linked list.

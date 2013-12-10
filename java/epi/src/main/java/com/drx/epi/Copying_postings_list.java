@@ -1,9 +1,13 @@
 // Copyright (c) 2013 Elements of Programming Interviews. All rights reserved.
+// @author Ivan Sharov
+
+package com.drx.epi;
+
 import java.util.Random;
 
 //@include
 class Copying_postings_list {
-   
+
   // @include
   public static <T> pnode_t<T> copy_postings_list(pnode_t<T> L) {
     // Return empty list if L is nullptr.
@@ -38,10 +42,10 @@ class Copying_postings_list {
     }
     return copied;
   }
-  
+
   // @exclude
   public static <T> void check_postings_list_equal(pnode_t<T> a, pnode_t<T> b) {
-    while (a != null && b != null) {      
+    while (a != null && b != null) {
       System.out.print(a.data + " ");
       assert(a.data == b.data);
       assert(a.jump == null &&
@@ -53,7 +57,7 @@ class Copying_postings_list {
       System.out.println("");
       a = a.next; b = b.next;
     }
-    
+
     assert(a == null &&
            b == null);
   }
@@ -64,10 +68,10 @@ class Copying_postings_list {
       int n;
       if (argv.length == 1) {
         n = Integer.parseInt(argv[0]);
-      } else {        
+      } else {
         n = gen.nextInt(1000) + 1;
       }
-      
+
       pnode_t<Integer> L = null;
       pnode_t<Integer> curr = L;
       for (int i = 0; i < n; ++i) {
@@ -78,8 +82,8 @@ class Copying_postings_list {
         } else {
           curr = L = temp;
         }
-        
-        // Randomly assigned a jump node.        
+
+        // Randomly assigned a jump node.
         int jump_num = (i > 0)?gen.nextInt(i):0;
         pnode_t<Integer> jump = L;
         while (jump_num-- != 0) {
@@ -87,9 +91,9 @@ class Copying_postings_list {
         }
         temp.jump = jump;
       }
-      
+
       pnode_t<Integer> copied = copy_postings_list(L);
       check_postings_list_equal(L, copied);
-    }    
+    }
   }
 }

@@ -1,4 +1,7 @@
 // Copyright (c) 2013 Elements of Programming Interviews. All rights reserved.
+// @author Andrey Pavlov
+
+package com.drx.epi;
 
 class Deletion_list_template {
   // @include
