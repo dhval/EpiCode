@@ -10,7 +10,7 @@ import static com.drx.epi.utils.Utils.*;
 
 public class Next_permutation {
 	// @include
-	static List<Integer> next_permutation(List<Integer> p) {
+	public static List<Integer> next_permutation(List<Integer> p) {
 	  int k = p.size() - 2;
 	  while (k >= 0 && p.get(k) >= p.get(k + 1)) {
 	    --k;
@@ -35,62 +35,50 @@ public class Next_permutation {
 	}
 	// @exclude
 
-  // AA begin
-  // derived from http://codeforces.com/blog/entry/3980
-
-  static void printList( List<Integer> p ) {
-    if ( p == null ) {
-      System.out.println("null");
-    } else {
-      for ( int i : p ) {
-        System.out.print(i + " " );
-      } 
-      System.out.println();
-    }
-  }
-
-
-  private static List<Integer> goldenNextPermutation( final ArrayList<Integer> c ) {
+	// AA begin
+	// derived from http://codeforces.com/blog/entry/3980
+	private static List<Integer> goldenNextPermutation(final List<Integer> c) {
 		// 1. finds the largest k, that c[k] < c[k+1]
-    List<Integer> result = (List<Integer>) c.clone();
-		int first = getFirst( result );
-		if ( first == -1 ) return null; // no greater permutation
+		List<Integer> result = new ArrayList<Integer>(c);
+		int first = getFirst(result);
+		if (first == -1) { // no greater permutation
+			return Collections.emptyList();
+		}
+
 		// 2. find last index toSwap, that c[k] < c[toSwap]
 		int toSwap = c.size() - 1;
-		while ( c.get(first).compareTo( c.get(toSwap) ) >= 0 )
+		while (c.get(first).compareTo(c.get(toSwap)) >= 0)
 			--toSwap;
+
 		// 3. swap elements with indexes first and last
-		myswap( result, first++, toSwap );
-		// 4. reverse sequence from k+1 to n (inclusive) 
+		swap(result, first++, toSwap);
+
+		// 4. reverse sequence from k+1 to n (inclusive)
 		toSwap = c.size() - 1;
-		while ( first < toSwap )
-			myswap( result, first++, toSwap-- );
+		while (first < toSwap) {
+			swap(result, first++, toSwap--);
+		}
+
 		return result;
 	}
   
-  // finds the largest k, that c[k] < c[k+1]
+	// finds the largest k, that c[k] < c[k+1]
 	// if no such k exists (there is not greater permutation), return -1
-	private static int getFirst( final List<Integer> c ) {
-		for ( int i = c.size() - 2; i >= 0; --i )
-			if ( c.get(i).compareTo( c.get(i + 1 ) ) < 0 )
+	private static int getFirst(final List<Integer> c) {
+		for (int i = c.size() - 2; i >= 0; --i) {
+			if (c.get(i).compareTo(c.get(i + 1)) < 0) {
 				return i;
+			}
+		}
 		return -1;
 	}
-
-	// swaps two elements (with indexes i and j) in array 
-	private static void myswap( List<Integer> c, final int i, final int j ) {
-		final Integer tmp = c.get(i);
-		c.set(i, c.get(j) );
-		c.set(j, tmp );
-	}
-  // AA end
+	// AA end
 
 	public static void main(String[] args) {
-
 		Random gen = new Random();
 
 		for (int times = 0; times < 1000; ++times) {
-			ArrayList<Integer> p = new ArrayList<Integer>();
+			List<Integer> p = new ArrayList<Integer>();
 			if (args.length > 2) {
 				for (int i = 1; i < args.length; ++i) {
 					p.add(Integer.valueOf(args[i]));
@@ -101,27 +89,22 @@ public class Next_permutation {
 					p.add(gen.nextInt(n));
 				}
 			}
+			// System.out.print("p = ");
+			// simplePrint(p);
+			// System.out.println();
 
-      // goldenNextPermutation does not change does not change p
-			List<Integer> gold = goldenNextPermutation( p );
-
-      // System.out.println("gold = ");
-      // printList(gold);
-      // System.out.println("original p = ");
-      // printList(p);
-      // p might be null, so cannot just ignore return value
-
-			List<Integer> tmp = next_permutation(p);
-      if ( tmp.equals( Collections.emptyList() ) ) {
-        p = null;
-      } else {
-        p = (ArrayList<Integer>) tmp;
-      }
-
-      // System.out.println("new p = ");
-      // printList(p);
-
-			assert ( gold == null && p == null || gold.equals(p));
+			// goldenNextPermutation does not change does not change p
+			List<Integer> gold = goldenNextPermutation(p);
+			// System.out.print("gold = ");
+			// simplePrint(gold);
+			// System.out.println();
+			
+			List<Integer> ans = next_permutation(p);
+			// System.out.print("ans = ");
+			// simplePrint(ans);
+			// System.out.println();
+			
+			assert equal(gold, ans);
 		}
 	}
 }
