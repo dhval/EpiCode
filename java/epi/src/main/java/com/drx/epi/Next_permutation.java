@@ -35,7 +35,6 @@ public class Next_permutation {
 	}
 	// @exclude
 
-	// AA begin
 	// derived from http://codeforces.com/blog/entry/3980
 	private static List<Integer> goldenNextPermutation(final List<Integer> c) {
 		// 1. finds the largest k, that c[k] < c[k+1]
@@ -72,7 +71,6 @@ public class Next_permutation {
 		}
 		return -1;
 	}
-	// AA end
 
 	public static void main(String[] args) {
 		Random gen = new Random();
