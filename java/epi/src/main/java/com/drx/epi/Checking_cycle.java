@@ -1,7 +1,10 @@
 // Copyright (c) 2013 Elements of Programming Interviews. All rights reserved.
+// @author Ivan Sharov
+
+package com.drx.epi;
 
 // @include
-class Checking_cycle_alternative {
+class Checking_cycle {
   public static <T> node_t<T> has_cycle(node_t<T> head) {
     node_t<T> fast = head;
     node_t<T> slow = head;
@@ -11,19 +14,30 @@ class Checking_cycle_alternative {
       slow = slow.next;
       fast = fast.next.next;
       if (slow == fast) {  // there is a cycle.
+        // Calculates the cycle length.
+        int cycle_len = 0;
+        do {
+          ++cycle_len;
+          fast = fast.next;
+        } while (slow != fast);
+
         // Tries to find the start of the cycle.
         slow = head;
+        fast = head;
+        // Fast pointer advances cycle_len first.
+        while (cycle_len-- > 0) {
+          fast = fast.next;
+        }
         // Both pointers advance at the same time.
         while (slow != fast) {
           slow = slow.next;
           fast = fast.next;
         }
-        return slow;  // slow is the start of cycle.
+        return slow;  // the start of cycle.
       }
     }
-    return null;  // means no cycle.
+    return null;  // no cycle.
   }
-  // @exclude
 
   public static void main(String[] args) {
     node_t<Integer> L3 = new node_t<Integer>(3, null);
@@ -49,3 +63,4 @@ class Checking_cycle_alternative {
     }
   }
 }
+// @exclude

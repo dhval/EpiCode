@@ -1,4 +1,7 @@
 // Copyright (c) 2013 Elements of Programming Interviews. All rights reserved.
+// @author Andrey Pavlov
+
+package com.drx.epi;
 
 class Overlapping_lists_template {
   // @include
@@ -36,6 +39,6 @@ class Overlapping_lists_template {
     L2.next.next = L2;
     assert(overlapping_lists(L1, L2) == null);
     L2.next.next = L1;
-    assert(overlapping_lists(L1, L2) != null);    
+    assert(overlapping_lists(L1, L2) != null);
   }
 }

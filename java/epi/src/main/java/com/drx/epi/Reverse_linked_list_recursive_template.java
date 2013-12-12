@@ -1,4 +1,7 @@
 // Copyright (c) 2013 Elements of Programming Interviews. All rights reserved.
+// @author Ivan Sharov
+
+package com.drx.epi;
 
 class Reverse_linked_list_recursive_template {
 
@@ -31,7 +34,7 @@ class Reverse_linked_list_recursive_template {
     node_t<Integer> L3 =
         new node_t<Integer>(3, null);
     L2.next = L3;
-  
+
     System.out.println("before reverse");
     print(L1);
     node_t<Integer> newhead = reverse_linked_list(L1);
@@ -39,6 +42,6 @@ class Reverse_linked_list_recursive_template {
     print(newhead);
     newhead = reverse_linked_list(newhead);
     System.out.println("\nafter another reverse");
-    print(newhead);  
+    print(newhead);
   }
 }
