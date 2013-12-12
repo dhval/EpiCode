@@ -10,6 +10,41 @@ public class Utils {
 
 	private static Random random;
 
+	/**
+	 * Returns index of the first element in <code>list</code> which compares
+	 * greater than <code>d</code>. Index is based on the order given by
+	 * list.iterator().
+	 * 
+	 * @param list
+	 * @param d
+	 * @return
+	 */
+	public static <T> int upper_bound(Collection<? extends Comparable<T>> list, T d) {
+		if (list == null || list.isEmpty()) {
+			return -1;
+		}
+		
+		int index = 0;
+		for (Iterator<? extends Comparable<T>> it = list.iterator(); it.hasNext(); ) {
+			Comparable<T> elem = it.next();
+			if (elem.compareTo(d) > 0) {
+				return index;
+			}
+			index++;
+		}
+		
+		return -1;
+	}
+	
+	public static void partial_sum(List<Double> P, List<Double> target) {
+		Double sum = 0D;
+		
+		for (Double num : P) {
+			sum += num;
+			target.add(sum);
+		}
+	}
+	
 	public static int[][] copy(int[][] m) {
 		int[][] copy = new int[m.length][];
 
@@ -138,6 +173,19 @@ public class Utils {
 		}
 	}
 
+	/**
+	 * Fills the list with sequentially increasing values, starting with value
+	 * and repetitively evaluating ++value.
+	 * 
+	 * @param list
+	 * @param num_of_elements
+	 * @param value
+	 */
+	public static void iota(List<Double> list, int num_of_elements, double value) {
+		for (int i = 1; i <= num_of_elements; ++i) {
+			list.add(value++);
+		}
+	}
 	public static void simplePrint(boolean[] array) {
 		if (array == null || array.length == 0) {
 			return;
