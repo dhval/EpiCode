@@ -11,6 +11,21 @@ public class Utils {
 	private static Random random;
 
 	/**
+	 * Fills the given {@link StringBuilder} with the given char.
+	 * @param sb
+	 * @param c
+	 */
+	public static void fill(StringBuilder sb, char c) { 
+		if (sb == null) {
+			return;
+		}
+		
+		for (int i = 0; i < sb.length(); i++) {
+			sb.setCharAt(i, c);
+		}
+	}
+	
+	/**
 	 * Returns index of the first element in <code>list</code> which compares
 	 * greater than <code>d</code>. Index is based on the order given by
 	 * list.iterator().
