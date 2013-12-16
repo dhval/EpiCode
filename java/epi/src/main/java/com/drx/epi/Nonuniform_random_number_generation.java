@@ -7,14 +7,19 @@ import static com.drx.epi.utils.Utils.upper_bound;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Random;
+
+import com.drx.epi.utils.BinaryOperators;
+import com.drx.epi.utils.Utils;
 
 public class Nonuniform_random_number_generation {
 	// @include
 	static double nonuniform_random_number_generation(List<Double> T, List<Double> P) {
 	  List<Double> prefix_P = new ArrayList<Double>();
-	  prefix_P.add(0D);
-	  partial_sum(P, prefix_P);
+	  Utils.fill(prefix_P, P.size() + 1, 0D);
+	  ListIterator<Double> iter = prefix_P.listIterator(); iter.next();
+	  partial_sum(P.iterator(), iter, BinaryOperators.ADD);
 	  // gen object is used to generate random numbers from in [0.0, 1.0]
 	  Random gen = new Random();
 	  
