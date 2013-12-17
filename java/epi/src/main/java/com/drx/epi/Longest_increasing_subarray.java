@@ -6,8 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import com.drx.epi.utils.Pair;
-
 public class Longest_increasing_subarray {
 	// @include
 	static Pair<Integer, Integer> find_longest_increasing_subarray(List<Integer> A) {
@@ -40,10 +38,10 @@ public class Longest_increasing_subarray {
 
 	static void simple_test() {
 	  Pair<Integer, Integer> ans = find_longest_increasing_subarray(Arrays.asList(-1, -1));
-	  assert(ans.first == 0 && ans.second == 0);
+	  assert(ans.getFirst() == 0 && ans.getSecond() == 0);
 	  
 	  ans = find_longest_increasing_subarray(Arrays.asList(1, 2));
-	  assert(ans.first == 0 && ans.second == 1);
+	  assert(ans.getFirst() == 0 && ans.getSecond() == 1);
 	}
 
 	public static void main(String[] args) {
@@ -68,7 +66,7 @@ public class Longest_increasing_subarray {
 				}
 			}
 			Pair<Integer, Integer> result = find_longest_increasing_subarray(A);
-			System.out.println(result.first + " " + result.second);
+			System.out.println(result.getFirst() + " " + result.getSecond());
 			int len = 1;
 			for (int i = 1; i < A.size(); ++i) {
 				if (A.get(i) > A.get(i - 1)) {
@@ -76,7 +74,7 @@ public class Longest_increasing_subarray {
 				} else {
 					len = 1;
 				}
-				assert (len <= result.second - result.first + 1);
+				assert (len <= result.getSecond() - result.getFirst() + 1);
 			}
 		}
 	}

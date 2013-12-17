@@ -1,15 +1,157 @@
 package com.drx.epi.utils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Random;
+
+import com.drx.epi.BinaryOperator;
 
 public class Utils {
 
 	private static Random random;
 
+	public static int find(int[] array, int x) {
+		if (array == null || array.length == 0) {
+			return -1;
+		}
+		
+		for (int i = 0; i < array.length; i++) {
+			if (array[i] == x) {
+				return i;
+			}
+		}
+		
+		return -1;
+	}
+	
+	public static <T> ListIterator<T> revListIterator(List<T> list) {
+		final ListIterator<T> li = list.listIterator();
+		while (li.hasNext()) {
+			li.next();
+		}
+		return new ListIterator<T>() {
+
+			@Override
+			public boolean hasNext() {
+				return li.hasPrevious();
+			}
+
+			@Override
+			public T next() {
+				return li.previous();
+			}
+
+			@Override
+			public boolean hasPrevious() {
+				return li.hasNext();
+			}
+
+			@Override
+			public T previous() {
+				return li.next();
+			}
+
+			@Override
+			public int nextIndex() {
+				return li.previousIndex();
+			}
+
+			@Override
+			public int previousIndex() {
+				return li.nextIndex();
+			}
+
+			@Override
+			public void remove() {
+				li.remove();
+			}
+
+			@Override
+			public void set(T e) {
+				li.set(e);
+			}
+
+			@Override
+			public void add(T e) {
+				li.add(e);
+			}
+		};
+	}
+	
+	/**
+	 * Fills the given {@link StringBuilder} with the given char.
+	 * @param sb
+	 * @param c
+	 */
+	public static void fill(StringBuilder sb, char c) { 
+		if (sb == null) {
+			return;
+		}
+		
+		for (int i = 0; i < sb.length(); i++) {
+			sb.setCharAt(i, c);
+		}
+	}
+	
+	/**
+	 * Returns index of the first element in <code>list</code> which compares
+	 * greater than <code>d</code>. Index is based on the order given by
+	 * list.iterator().
+	 * 
+	 * @param list
+	 * @param d
+	 * @return
+	 */
+	public static <T> int upper_bound(Collection<? extends Comparable<T>> list, T d) {
+		if (list == null || list.isEmpty()) {
+			return -1;
+		}
+		
+		int index = 0;
+		for (Iterator<? extends Comparable<T>> it = list.iterator(); it.hasNext(); ) {
+			Comparable<T> elem = it.next();
+			if (elem.compareTo(d) > 0) {
+				return index;
+			}
+			index++;
+		}
+		
+		return -1;
+	}
+	
+	public static <T> void partial_sum(Iterator<T> listIter, ListIterator<T> targetIter, BinaryOperator<T> op) {
+		T result = null;
+		
+		while (listIter.hasNext()) {
+			result = op.apply(result, listIter.next());
+			targetIter.next();
+			targetIter.set(result);
+		}
+	}
+	
+	public static <T> List<List<T>> copy(List<List<T>> list) {
+		List<List<T>> copy = new ArrayList<List<T>>(list.size());
+
+		for (List<T> element: list) {
+			copy.add(new ArrayList<T>(element));
+		}
+		
+		return copy;
+	}
+	public static boolean[][] copy(boolean[][] m) {
+		boolean[][] copy = new boolean[m.length][];
+
+		for (int i = 0; i < m.length; i++) {
+			copy[i] = Arrays.copyOf(m[i], m[i].length);
+		}
+
+		return copy;
+	}
+	
 	public static int[][] copy(int[][] m) {
 		int[][] copy = new int[m.length][];
 
@@ -83,14 +225,20 @@ public class Utils {
 		return -1;
 	}
 
+	public static <T> void swap(T[] array, int index1, int index2) {
+		T element1_copy = array[index1];
+		array[index1] = array[index2];
+		array[index2] = element1_copy;
+	}
+	
 	public static void swap(int[] array, int index1, int index2) {
 		int element1_copy = array[index1];
 		array[index1] = array[index2];
 		array[index2] = element1_copy;
 	}
 
-	public static void swap(List<Integer> list, Integer index1, Integer index2) {
-		int element1_copy = list.get(index1);
+	public static <T> void swap(List<T> list, Integer index1, Integer index2) {
+		T element1_copy = list.get(index1);
 		list.set(index1, list.get(index2));
 		list.set(index2, element1_copy);
 	}
@@ -98,12 +246,13 @@ public class Utils {
 	/**
 	 * Adds <code>num_of_elements</code> of elements to the list
 	 * <code>list</code>, each being a copy of <code>value</code>.
+	 * @param <T>
 	 * 
 	 * @param list
 	 * @param num_of_elements
 	 * @param value
 	 */
-	public static void fill(List<Integer> list, int num_of_elements, int value) {
+	public static <T> void fill(List<T> list, int num_of_elements, T value) {
 		for (int i = 1; i <= num_of_elements; ++i) {
 			list.add(value);
 		}
@@ -138,6 +287,19 @@ public class Utils {
 		}
 	}
 
+	/**
+	 * Fills the list with sequentially increasing values, starting with value
+	 * and repetitively evaluating ++value.
+	 * 
+	 * @param list
+	 * @param num_of_elements
+	 * @param value
+	 */
+	public static void iota(List<Double> list, int num_of_elements, double value) {
+		for (int i = 1; i <= num_of_elements; ++i) {
+			list.add(value++);
+		}
+	}
 	public static void simplePrint(boolean[] array) {
 		if (array == null || array.length == 0) {
 			return;

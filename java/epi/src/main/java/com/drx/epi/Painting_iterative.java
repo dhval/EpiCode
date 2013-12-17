@@ -7,8 +7,6 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
 
-import com.drx.epi.utils.Pair;
-
 public class Painting_iterative {
 	static void print_matrix(boolean[][] A) {
 		for (int i = 0; i < A.length; ++i) {
@@ -29,12 +27,12 @@ public class Painting_iterative {
 		while (!q.isEmpty()) {
 			Pair<Integer, Integer> curr = q.element();
 			for (int[] d : dir) {
-				Pair<Integer, Integer> next = new Pair<Integer, Integer>(curr.first + d[0], curr.second + d[1]);
-				if (next.first >= 0 && next.first < A.length
-						&& next.second >= 0 && next.second < A[next.first].length
-						&& A[next.first][next.second] == color) {
+				Pair<Integer, Integer> next = new Pair<Integer, Integer>(curr.getFirst() + d[0], curr.getSecond() + d[1]);
+				if (next.getFirst() >= 0 && next.getFirst() < A.length
+						&& next.getSecond() >= 0 && next.getSecond() < A[next.getFirst()].length
+						&& A[next.getFirst()][next.getSecond()] == color) {
 					// Flips the color.
-					A[next.first][next.second] = !A[next.first][next.second];
+					A[next.getFirst()][next.getSecond()] = !A[next.getFirst()][next.getSecond()];
 					q.add(next);
 				}
 			}
