@@ -22,7 +22,7 @@ class Subseq_cover {
   }
 
   // @include
-  public static pair<Integer, Integer> find_smallest_sequentially_covering_subset(
+  public static Pair<Integer, Integer> find_smallest_sequentially_covering_subset(
       ArrayList<String> A,
       ArrayList<String> Q) {
     HashMap<String, Integer> K = new HashMap<String, Integer>();  // stores the order of each Q[i].
@@ -37,7 +37,7 @@ class Subseq_cover {
       K.put(Q.get(i), i);
     }
 
-    pair<Integer, Integer> res = new pair<Integer, Integer>(-1, A.size());  // default value.
+    Pair<Integer, Integer> res = new Pair<Integer, Integer>(-1, A.size());  // default value.
     for (int i = 0; i < A.size(); ++i) {
       Integer it = K.get(A.get(i));
       if (it != null) {
@@ -66,7 +66,7 @@ class Subseq_cover {
     ArrayList<String> A3 = new ArrayList<String>(Arrays.asList(A3_));
     ArrayList<String> subseq4 = new ArrayList<String>(Arrays.asList(subseq4_));
 
-    pair<Integer, Integer> rr = find_smallest_sequentially_covering_subset(A3, subseq4);
+    Pair<Integer, Integer> rr = find_smallest_sequentially_covering_subset(A3, subseq4);
     assert(rr.first == 0 && rr.second == 12);
   }
 
@@ -110,7 +110,7 @@ class Subseq_cover {
       }
       System.out.println("");
 
-      pair<Integer, Integer> res = find_smallest_sequentially_covering_subset(A, Q);
+      Pair<Integer, Integer> res = find_smallest_sequentially_covering_subset(A, Q);
       System.out.println(res.first + ", " + res.second);
       if (res.first != -1 && res.second != Q.size()) {
         if (res.first != res.second)

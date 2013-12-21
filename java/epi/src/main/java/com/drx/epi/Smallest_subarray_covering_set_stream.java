@@ -3,27 +3,26 @@
 
 package com.drx.epi;
 
-import java.util.Scanner;
-import java.util.LinkedList;
+import java.util.Iterator;
 import java.util.HashMap;
-import java.util.ListIterator;
 import java.util.ArrayList;
 
 class Smallest_subarray_covering_set_stream{
   // @include
-  public static pair<Integer, Integer> find_smallest_subarray_covering_subset(
-      Scanner sin, ArrayList<String> Q) {
+  public static Pair<Integer, Integer> find_smallest_subarray_covering_subset(
+      ArrayList<String> A, ArrayList<String> Q) {
     Linked_list<Integer> loc = new Linked_list<Integer>();  // tracks the last occurrence (index) of each string in Q.
     HashMap<String, Linked_list<Integer>.Node> dict= new HashMap<String, Linked_list<Integer>.Node>();
     for (String s : Q) {
       dict.put(s, null);
     }
   
-    pair<Integer, Integer> res = new pair<Integer, Integer>(-1, -1);
+    Pair<Integer, Integer> res = new Pair<Integer, Integer>(-1, -1);
     int idx = 0;
     String s = new String();
+    Iterator<String> sin = A.iterator();
     while (sin.hasNext()) {
-      s = sin.next();     
+      s = sin.next();
       if (dict.containsKey(s)) {  // s is in Q.
         Linked_list<Integer>.Node it = dict.get(s);
         if (it != null) {

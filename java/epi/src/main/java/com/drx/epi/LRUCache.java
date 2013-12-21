@@ -7,15 +7,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-class pair<First, Second>{
-  public First first;
-  public Second second;
-  pair(First f, Second s){
-    first = f;
-    second = s;
-  }
-}
-
 // @include
 public class LRUCache {
   
@@ -24,7 +15,7 @@ public class LRUCache {
   }
   
   public boolean lookup(int isbn) {
-    pair<Linked_list<Integer>.Node, Integer> it = cache_.get(isbn);
+    Pair<Linked_list<Integer>.Node, Integer> it = cache_.get(isbn);
     if (it == null) {
       return false;
     }
@@ -35,7 +26,7 @@ public class LRUCache {
   }
 
   void insert(int isbn, int price) {
-    pair<Linked_list<Integer>.Node, Integer> it = cache_.get(isbn);
+    Pair<Linked_list<Integer>.Node, Integer> it = cache_.get(isbn);
     if (it != null) {
       moveToFront(isbn, it);
     } else {
@@ -43,12 +34,12 @@ public class LRUCache {
       if (cache_.size() == capacity) {
         cache_.remove(data_.back());
       }      
-      cache_.put(isbn, new pair<Linked_list<Integer>.Node, Integer>(data_.push_front(isbn), price));      
+      cache_.put(isbn, new Pair<Linked_list<Integer>.Node, Integer>(data_.push_front(isbn), price));      
     }
   }
 
   public boolean erase(int isbn) {
-    pair<Linked_list<Integer>.Node, Integer> it = cache_.get(isbn);
+    Pair<Linked_list<Integer>.Node, Integer> it = cache_.get(isbn);
     if (it == null) {
       return false;
     }
@@ -59,7 +50,7 @@ public class LRUCache {
   }
 
   // Move the most recent accessed item to the front.
-  void moveToFront(int isbn, pair<Linked_list<Integer>.Node, Integer> it) {    
+  void moveToFront(int isbn, Pair<Linked_list<Integer>.Node, Integer> it) {    
     data_.erase(it.first);
     data_.push_back(isbn);
     it.first = data_.front();
@@ -67,7 +58,7 @@ public class LRUCache {
 
   public int lookup_val = 0;
   private int capacity;
-  private HashMap<Integer, pair<Linked_list<Integer>.Node, Integer>> cache_ = new HashMap<Integer, pair<Linked_list<Integer>.Node, Integer>>();  
+  private HashMap<Integer, Pair<Linked_list<Integer>.Node, Integer>> cache_ = new HashMap<Integer, Pair<Linked_list<Integer>.Node, Integer>>();  
   private Linked_list<Integer> data_ = new Linked_list<Integer>();
 // @exclude
 

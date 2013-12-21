@@ -8,7 +8,6 @@ import java.util.HashSet;
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Scanner;
 
 class Smallest_subarray_covering_set{
       
@@ -22,12 +21,12 @@ class Smallest_subarray_covering_set{
   }
   
   //@include
-  public static pair<Integer, Integer> find_smallest_subarray_covering_subset(
-     ArrayList<String> A, ArrayList<String>Q) {
+  public static Pair<Integer, Integer> find_smallest_subarray_covering_subset(
+     ArrayList<String> A, ArrayList<String> Q) {
    HashSet<String> dict = new HashSet<String>(Q);
    HashMap<String, Integer> count_Q = new HashMap<String, Integer>();
    int l = 0, r = 0;
-   pair<Integer, Integer> res = new pair<Integer, Integer>(-1, -1);
+   Pair<Integer, Integer> res = new Pair<Integer, Integer>(-1, -1);
    while (r < A.size()) {
      // Keep moving r until it reaches end or count_Q has |Q| items.
      while (r < A.size() && count_Q.size() < Q.size()) {
@@ -47,8 +46,9 @@ class Smallest_subarray_covering_set{
      // Keep moving l until it reaches end or count_Q has less |Q| items.
      while (l < r && count_Q.size() == Q.size()) {
        if (dict.contains(A.get(l))) {
-         Integer it = count_Q.get(A.get(l));
-         if (it - 1 == 0) {
+         int it = count_Q.get(A.get(l));
+         count_Q.put(A.get(l), --it);
+         if (it == 0) {
            count_Q.remove(A.get(l));
            if ((res.first == -1 && res.second == -1) ||
                r - 1 - l < res.second - res.first) {
@@ -71,7 +71,7 @@ class Smallest_subarray_covering_set{
       dict.add(s);
     }
   
-    pair<Integer, Integer> ans = new pair<Integer, Integer>(0, A.size() - 1);
+    Pair<Integer, Integer> ans = new Pair<Integer, Integer>(0, A.size() - 1);
     for (int l = 0; l < A.size(); ++l) {
       HashMap<String, Integer> count = new HashMap<String, Integer>();
       for (int r = l; r < A.size() && r - l < ans.second - ans.first; ++r) {
@@ -111,20 +111,13 @@ class Smallest_subarray_covering_set{
       }
       cout << endl;
       */
-      HashSet<String> dict = new HashSet<String>();
-      String s = new String();
-      for (int i = 0; i < A.size(); ++i) {
-        dict.add(A.get(i));
-        s += A.get(i);
-        s += ' ';
-      }
-            
+      HashSet<String> dict = new HashSet<String>(A);            
       int m = gen.nextInt(dict.size()) + 1;
       ArrayList<String> Q = new ArrayList<String>();
       Iterator<String> it = dict.iterator();
       while(it.hasNext()){
         Q.add(it.next());
-        if (--m == 0){
+        if (--m == 0) {
           break;
         }
       }
@@ -135,7 +128,7 @@ class Smallest_subarray_covering_set{
       }
       cout << endl;
       */
-      pair<Integer, Integer> res = find_smallest_subarray_covering_subset(A, Q);
+      Pair<Integer, Integer> res = find_smallest_subarray_covering_subset(A, Q);
       System.out.println(res.first + ", " + res.second);
       dict.clear();
       for (int i = 0; i < Q.size(); ++i) {
@@ -147,8 +140,7 @@ class Smallest_subarray_covering_set{
         }
       }
       assert(dict.isEmpty() == true);
-      Scanner sin = new Scanner(s).useDelimiter("\\s*");
-      pair<Integer, Integer> res2 = Smallest_subarray_covering_set_stream.find_smallest_subarray_covering_subset(sin, Q);
+      Pair<Integer, Integer> res2 = Smallest_subarray_covering_set_stream.find_smallest_subarray_covering_subset(A, Q);
       System.out.println(res2.first + ", " + res2.second);
       dict.clear();
       for (int i = 0; i < Q.size(); ++i) {
