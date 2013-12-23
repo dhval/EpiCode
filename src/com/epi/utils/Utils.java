@@ -1,5 +1,7 @@
 package com.epi.utils;
 
+import java.io.Closeable;
+import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,6 +18,16 @@ public class Utils {
 
 	private static Random random;
 
+	public static void close(Closeable closeable) {
+		try {
+			if (closeable != null) {
+				closeable.close();
+			}
+		} catch (IOException e) {
+			// We want to close "closeable" silently
+		}
+	}
+	
 	public static Pair<Integer, Integer> getCanonicalFractional(int a, int b) {
 		int gcd = BigInteger.valueOf(a).gcd(BigInteger.valueOf(b)).intValue();
 		a /= gcd;

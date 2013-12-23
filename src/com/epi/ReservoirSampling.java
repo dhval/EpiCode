@@ -1,11 +1,11 @@
 // Copyright (c) 2013 Elements of Programming Interviews. All rights reserved.
 package com.epi;
 
-//import static com.drx.epi.utils.Utils.simplePrint;
+import static com.epi.utils.Utils.close;
+// import static com.drx.epi.utils.Utils.simplePrint;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.Closeable;
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -44,6 +44,7 @@ public class ReservoirSampling {
 			x = (Integer) readObjectSilently(osin);
 		}
 		
+		// Close "osin" silently
 		close(osin);
 		return R;
 	}
@@ -59,17 +60,6 @@ public class ReservoirSampling {
 		}
 		return object;
 	}
-
-	private static void close(Closeable closeable) {
-		try {
-			if (closeable != null) {
-				closeable.close();
-			}
-		} catch (IOException e) {
-			// We want to close "closeable" silently
-		}
-	}
-	
 	// @exclude
 
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
