@@ -1,5 +1,6 @@
 package com.drx.epi.utils;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -9,11 +10,23 @@ import java.util.ListIterator;
 import java.util.Random;
 
 import com.drx.epi.BinaryOperator;
+import com.drx.epi.Pair;
 
 public class Utils {
 
 	private static Random random;
 
+	public static Pair<Integer, Integer> getCanonicalFractional(int a, int b) {
+		int gcd = BigInteger.valueOf(a).gcd(BigInteger.valueOf(b)).intValue();
+		a /= gcd;
+		b /= gcd;
+		return b < 0 ? new Pair<Integer, Integer>(-a, -b) : new Pair<Integer, Integer>(a, b);
+	}
+	
+	public static <T> boolean nullEqual(T first, T second) {
+		return first == null ? second == null : first.equals(second);
+	}
+	
 	public static int find(int[] array, int x) {
 		if (array == null || array.length == 0) {
 			return -1;

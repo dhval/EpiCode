@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-class Smallest_subarray_covering_set{
+class SmallestSubarrayCoveringSet{
       
   public static String rand_string(int len) {
     StringBuilder sb = new StringBuilder(); 
@@ -140,7 +140,7 @@ class Smallest_subarray_covering_set{
         }
       }
       assert(dict.isEmpty() == true);
-      Pair<Integer, Integer> res2 = Smallest_subarray_covering_set_stream.find_smallest_subarray_covering_subset(A, Q);
+      Pair<Integer, Integer> res2 = SmallestSubarrayCoveringSetStream.find_smallest_subarray_covering_subset(A, Q);
       System.out.println(res2.first + ", " + res2.second);
       dict.clear();
       for (int i = 0; i < Q.size(); ++i) {

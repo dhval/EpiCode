@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
-class Subseq_cover {
+class SubseqCover {
 
   public static String rand_string(int len) {
     StringBuilder sb = new StringBuilder();

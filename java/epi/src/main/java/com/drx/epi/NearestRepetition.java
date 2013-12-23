@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.HashMap;
 
-class Nearest_repetition {
+class NearestRepetition {
   private static String rand_String(int len) {
     StringBuilder ret = new StringBuilder();
     Random rnd = new Random();

@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.HashMap;
 import java.util.ArrayList;
 
-class Smallest_subarray_covering_set_stream{
+class SmallestSubarrayCoveringSetStream{
   // @include
   public static Pair<Integer, Integer> find_smallest_subarray_covering_subset(
       ArrayList<String> A, ArrayList<String> Q) {

@@ -6,7 +6,7 @@ package com.drx.epi;
 import java.util.Random;
 import java.util.HashMap;
 
-class Anonymous_letter {
+class AnonymousLetter {
   private static String rand_string(int len) {
     StringBuilder ret = new StringBuilder();
     Random rnd = new Random();

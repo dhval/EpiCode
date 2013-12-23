@@ -3,59 +3,25 @@
 
 package com.drx.epi;
 
+import static com.drx.epi.utils.Utils.getCanonicalFractional;
+import static com.drx.epi.utils.Utils.nullEqual;
+
 import java.awt.Point;
-import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Comparator;
-import java.util.Collections;
+import java.util.Map;
 import java.util.Random;
-
-class Helper {
-  public static final boolean equal(Object o1, Object o2) {
-    if (o1 == null) {
-      return o2 == null;
-    }
-    return o1.equals(o2);
-  }
-
-  public static Pair<Integer, Integer> getCanonicalFractional(int a, int b) {
-    int gcd = BigInteger.valueOf(a).gcd(BigInteger.valueOf(b)).intValue();
-    a /= gcd;
-    b /= gcd;
-    return b < 0 ? new Pair<Integer,Integer>(-a, -b) : new Pair<Integer,Integer>(a, b);
-  }
-}
-
-class Pair<T1,T2> {
-  public T1 first;
-  public T2 second;
-
-  Pair(T1 f, T2 s) {
-    first = f;
-    second = s;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (o instanceof Pair<?,?>) {
-      final Pair<?,?> p = (Pair<?,?>)o;
-      return Helper.equal(first, p.first) && Helper.equal(second, p.second);
-    }
-
-    return false;
-  }
-}
 
 class Line {
   private Pair<Integer,Integer> slope;
   private Pair<Integer,Integer> intercept;
 
   Line(Point a, Point b) {
-    slope = a.x != b.x ? Helper.getCanonicalFractional(b.y - a.y, b.x - a.x) : new Pair<Integer, Integer>(1, 0);
-    intercept = a.x != b.x ? Helper.getCanonicalFractional(b.x * a.y - a.x * b.y, b.x - a.x) : new Pair<Integer, Integer>(a.x, 1);
+    slope = a.x != b.x ? getCanonicalFractional(b.y - a.y, b.x - a.x) : new Pair<Integer, Integer>(1, 0);
+    intercept = a.x != b.x ? getCanonicalFractional(b.x * a.y - a.x * b.y, b.x - a.x) : new Pair<Integer, Integer>(a.x, 1);
   }
 
   public Pair<Integer,Integer> getSlope() { return slope; }
@@ -66,7 +32,7 @@ class Line {
     if (o instanceof Line)
       {
         Line l = (Line)o;
-        return Helper.equal(slope, l.getSlope()) && Helper.equal(intercept, l.getIntercept());
+        return nullEqual(slope, l.getSlope()) && nullEqual(intercept, l.getIntercept());
       }
 
     return false;

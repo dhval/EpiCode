@@ -5,7 +5,7 @@ package com.drx.epi;
 
 import java.util.Random;
 
-class Hash_dictionary {
+class HashDictionary {
   private static String rand_string(int len) {
     StringBuilder ret = new StringBuilder();
     Random rnd = new Random();
