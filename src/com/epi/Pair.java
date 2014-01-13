@@ -1,33 +1,17 @@
-package com.epi;
-
-import static com.epi.utils.Utils.nullEqual;
+package com.drx.epi;
 
 /**
  * @author translated from c++ by Blazheev Alexander
  */
 public class Pair<A, B> {
-    public A first;
-    public B second;
+    private A first;
+    private B second;
 
     public Pair(A first, B second) {
         this.first = first;
         this.second = second;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-    	if (!(obj instanceof Pair)) {
-    		return false;
-    	}
-    	
-    	final Pair<A, B> that = (Pair<A, B>) obj;
-    	return nullEqual(first, that.getFirst()) && nullEqual(second, that.getSecond());
-    }
-    
-	public String toString() {
-        return first + " " + second;
-    }
-    
     public A getFirst() {
         return first;
     }
@@ -43,5 +27,12 @@ public class Pair<A, B> {
     public void setSecond(B second) {
         this.second = second;
     }
-    
+
+    public String toString() {
+        return first + " " + second;
+    }
+
+    public static <T extends Comparable<T>> Pair<T, T> minmax(T a, T b) {
+        return b.compareTo(a) < 0 ? new Pair<T, T>(b, a) : new Pair<T, T>(a, b);
+    }
 }
