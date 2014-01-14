@@ -5,7 +5,7 @@ import java.util.LinkedList;
 /**
  * @author translated from c++ by Blazheev Alexander
  */
-public class RNP {
+public class RPN {
     // @include
     public static int eval(String s) {
         LinkedList<Integer> eval_stack = new LinkedList<Integer>();
