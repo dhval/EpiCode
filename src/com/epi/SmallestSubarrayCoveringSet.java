@@ -37,10 +37,10 @@ class SmallestSubarrayCoveringSet{
      }
   
      if (count_Q.size() == Q.size() &&  // found |Q| keywords.
-         ((res.first == -1 && res.second == -1) ||
-          r - 1 - l < res.second - res.first)) {
-       res.first = l;
-       res.second= r - 1;
+         ((res.getFirst() == -1 && res.getSecond() == -1) ||
+          r - 1 - l < res.getSecond() - res.getFirst())) {
+       res.setFirst(l);
+       res.setSecond(r - 1);
      }
   
      // Keep moving l until it reaches end or count_Q has less |Q| items.
@@ -50,10 +50,10 @@ class SmallestSubarrayCoveringSet{
          count_Q.put(A.get(l), --it);
          if (it == 0) {
            count_Q.remove(A.get(l));
-           if ((res.first == -1 && res.second == -1) ||
-               r - 1 - l < res.second - res.first) {
-             res.first = l;
-             res.second= r - 1;
+           if ((res.getFirst() == -1 && res.getSecond() == -1) ||
+               r - 1 - l < res.getSecond() - res.getFirst()) {
+             res.setFirst(l);
+             res.setSecond(r - 1);
            }
          }
        }
@@ -74,14 +74,14 @@ class SmallestSubarrayCoveringSet{
     Pair<Integer, Integer> ans = new Pair<Integer, Integer>(0, A.size() - 1);
     for (int l = 0; l < A.size(); ++l) {
       HashMap<String, Integer> count = new HashMap<String, Integer>();
-      for (int r = l; r < A.size() && r - l < ans.second - ans.first; ++r) {
+      for (int r = l; r < A.size() && r - l < ans.getSecond() - ans.getFirst(); ++r) {
         if (dict.contains(A.get(r))) {                    
           count.put(A.get(r), count.containsKey(A.get(r))?count.get(A.get(r))+1:1);
         }
         if (count.size() == Q.size()) {
-          if (r - l < ans.second - ans.first) {
-            ans.first = l;
-            ans.second= r;
+          if (r - l < ans.getSecond() - ans.getFirst()) {
+            ans.setFirst(l);
+            ans.setSecond(r);
           }
           break;
         }
@@ -89,7 +89,7 @@ class SmallestSubarrayCoveringSet{
       count.clear();
     }
     
-    return ans.second - ans.first;
+    return ans.getSecond() - ans.getFirst();
   }
 
   public static void main(String[] argv) {
@@ -129,31 +129,31 @@ class SmallestSubarrayCoveringSet{
       cout << endl;
       */
       Pair<Integer, Integer> res = find_smallest_subarray_covering_subset(A, Q);
-      System.out.println(res.first + ", " + res.second);
+      System.out.println(res.getFirst() + ", " + res.getSecond());
       dict.clear();
       for (int i = 0; i < Q.size(); ++i) {
         dict.add(Q.get(i));
       }
-      for (int i = res.first; i <= res.second; ++i) {
+      for (int i = res.getFirst(); i <= res.getSecond(); ++i) {
         if (dict.contains(A.get(i))) {
           dict.remove(A.get(i));
         }
       }
       assert(dict.isEmpty() == true);
       Pair<Integer, Integer> res2 = SmallestSubarrayCoveringSetStream.find_smallest_subarray_covering_subset(A, Q);
-      System.out.println(res2.first + ", " + res2.second);
+      System.out.println(res2.getFirst() + ", " + res2.getSecond());
       dict.clear();
       for (int i = 0; i < Q.size(); ++i) {
         dict.add(Q.get(i));
       }
-      for (int i = res.first; i <= res.second; ++i) {
+      for (int i = res.getFirst(); i <= res.getSecond(); ++i) {
         if (dict.contains(A.get(i))) {
           dict.remove(A.get(i));
         }
       }
       assert(dict.isEmpty() == true);
-      assert(res.second - res.first == res2.second - res2.first);
-      assert(res.second - res.first == check_ans(A, Q));
+      assert(res.getSecond() - res.getFirst() == res2.getSecond() - res2.getFirst());
+      assert(res.getSecond() - res.getFirst() == check_ans(A, Q));
     }    
   }
 }

@@ -34,10 +34,10 @@ class SmallestSubarrayCoveringSetStream{
       }
   
       if (loc.size() == Q.size() &&  // found |Q| keywords.
-          ((res.first == -1 && res.second == -1) ||
-           idx - loc.front().item < res.second - res.first)) {
-        res.first = loc.front().item;
-        res.second= idx;
+          ((res.getFirst() == -1 && res.getSecond() == -1) ||
+           idx - loc.front().item < res.getSecond() - res.getFirst())) {
+        res.setFirst(loc.front().item);
+        res.setSecond(idx);
       }
       ++idx;
     }

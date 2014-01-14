@@ -1,4 +1,5 @@
 // Copyright (c) 2013 Elements of Programming Interviews. All rights reserved.
+package com.epi;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,7 +7,7 @@ import java.util.HashSet;
 import java.util.Random;
 
 // @include
-class Interval{
+class Interval {
   int left, right;
   Interval(int l, int r){
     left = l;

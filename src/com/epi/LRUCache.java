@@ -20,7 +20,7 @@ public class LRUCache {
       return false;
     }
 
-    lookup_val = it.second;
+    lookup_val = it.getSecond();
     moveToFront(isbn, it);
     return true;
   }
@@ -44,16 +44,16 @@ public class LRUCache {
       return false;
     }
 
-    data_.erase(it.first);    
+    data_.erase(it.getFirst());    
     cache_.remove(isbn);
     return true;
   }
 
   // Move the most recent accessed item to the front.
   void moveToFront(int isbn, Pair<Linked_list<Integer>.Node, Integer> it) {    
-    data_.erase(it.first);
+    data_.erase(it.getFirst());
     data_.push_back(isbn);
-    it.first = data_.front();
+    it.setFirst(data_.front());
   }
 
   public int lookup_val = 0;

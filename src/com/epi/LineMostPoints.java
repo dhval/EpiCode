@@ -40,7 +40,7 @@ class Line {
 
   @Override
   public int hashCode() {
-    return slope.first ^ slope.second ^ intercept.first ^ intercept.second;
+    return slope.getFirst() ^ slope.getSecond() ^ intercept.getFirst() ^ intercept.getSecond();
   }
 }
 
@@ -101,7 +101,7 @@ public class LineMostPoints {
       });
 
     int res = check(P);
-    // cout << res << " " << line_max_points.second.size() << endl;
+    // cout << res << " " << line_max_points.getSecond().size() << endl;
     assert(res == line_max_points.size());
     // @include
     // Return the line with most points have passed.
@@ -149,7 +149,7 @@ public class LineMostPoints {
         }
       */
       Line l = find_line_with_most_points(points);
-      System.out.println(l.getSlope().first + " " + l.getSlope().second + " " + l.getIntercept().first + " " + l.getIntercept().second);
+      System.out.println(l.getSlope().getFirst() + " " + l.getSlope().getSecond() + " " + l.getIntercept().getFirst() + " " + l.getIntercept().getSecond());
     }
   }
 }

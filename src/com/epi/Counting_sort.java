@@ -1,4 +1,5 @@
 // Copyright (c) 2013 Elements of Programming Interviews. All rights reserved.
+package com.epi;
 
 // @include
 import java.util.ArrayList;

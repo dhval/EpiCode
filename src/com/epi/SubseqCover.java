@@ -49,9 +49,9 @@ class SubseqCover {
         L.set(it, i);
 
         if (it == Q.size() - 1 &&
-            D.get(D.size() - 1) < res.second - res.first + 1) {
-          res.first = i - D.get(D.size() - 1) + 1;
-          res.second = i;
+            D.get(D.size() - 1) < res.getSecond() - res.getFirst() + 1) {
+          res.setFirst(i - D.get(D.size() - 1) + 1);
+          res.setSecond(i);
         }
       }
     }
@@ -67,7 +67,7 @@ class SubseqCover {
     ArrayList<String> subseq4 = new ArrayList<String>(Arrays.asList(subseq4_));
 
     Pair<Integer, Integer> rr = find_smallest_sequentially_covering_subset(A3, subseq4);
-    assert(rr.first == 0 && rr.second == 12);
+    assert(rr.getFirst() == 0 && rr.getSecond() == 12);
   }
 
   public static void main(String[] argv) {
@@ -111,13 +111,13 @@ class SubseqCover {
       System.out.println("");
 
       Pair<Integer, Integer> res = find_smallest_sequentially_covering_subset(A, Q);
-      System.out.println(res.first + ", " + res.second);
-      if (res.first != -1 && res.second != Q.size()) {
-        if (res.first != res.second)
-          System.out.println(res.first + ", " + res.second);
+      System.out.println(res.getFirst() + ", " + res.getSecond());
+      if (res.getFirst() != -1 && res.getSecond() != Q.size()) {
+        if (res.getFirst() != res.getSecond())
+          System.out.println(res.getFirst() + ", " + res.getSecond());
         dict.clear();
         dict.addAll(Q);
-        for (int i = res.first; i <= res.second; ++i) {
+        for (int i = res.getFirst(); i <= res.getSecond(); ++i) {
           if (dict.contains(A.get(i))) {
             dict.remove(A.get(i));
           }
