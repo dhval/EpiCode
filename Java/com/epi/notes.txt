@@ -1,2 +1,0 @@
-check on Pair.java - conflicting implementations from haris and alex?
-ditto SudokuChecker/SudokuSolver
