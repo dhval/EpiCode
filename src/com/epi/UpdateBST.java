@@ -1,4 +1,4 @@
-package com.drx.epi;
+package com.epi;
 
 /**
  * @author translated from c++ by Blazheev Alexander

@@ -1,9 +1,9 @@
-package com.drx.epi;
+package com.epi;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-import static com.drx.epi.MaxSubmatrixRectangleBruteForce.*;
+import static com.epi.MaxSubmatrixRectangleBruteForce.*;
 
 /**
  * @author translated from c++ by Blazheev Alexander

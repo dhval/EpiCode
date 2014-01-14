@@ -1,8 +1,8 @@
-package com.drx.epi;
+package com.epi;
 
 import java.util.Arrays;
 
-import static com.drx.epi.SudokuCheck.*;
+import static com.epi.SudokuCheck.*;
 
 /**
  * @author translated from c++ by Blazheev Alexander

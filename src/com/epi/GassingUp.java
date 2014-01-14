@@ -2,7 +2,7 @@ package com.epi;
 
 import java.util.Random;
 
-//import static com.drx.epi.utils.Utils.simplePrint;
+//import static com.epi.utils.Utils.simplePrint;
 
 public class GassingUp {
 	// @include

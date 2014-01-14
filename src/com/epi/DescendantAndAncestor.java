@@ -1,6 +1,6 @@
-package com.drx.epi;
+package com.epi;
 
-import static com.drx.epi.BinaryTreePrototypeTemplate.BinaryTree;
+import static com.epi.BinaryTreePrototypeTemplate.BinaryTree;
 
 /**
  * @author translated from c++ by Blazheev Alexander

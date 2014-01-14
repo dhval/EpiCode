@@ -1,6 +1,6 @@
-package com.drx.epi;
+package com.epi;
 
-import static com.drx.epi.DoublyLinkedListPrototypeTemplate.NodeT;
+import static com.epi.DoublyLinkedListPrototypeTemplate.NodeT;
 
 /**
  * @author translated from c++ by Blazheev Alexander

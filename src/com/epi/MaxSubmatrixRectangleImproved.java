@@ -1,9 +1,9 @@
-package com.drx.epi;
+package com.epi;
 
 import java.util.*;
 
-import static com.drx.epi.LargestRectangleUnderSkyline.*;
-import static com.drx.epi.MaxSubmatrixRectangleBruteForce.*;
+import static com.epi.LargestRectangleUnderSkyline.*;
+import static com.epi.MaxSubmatrixRectangleBruteForce.*;
 
 /**
  * @author translated from c++ by Blazheev Alexander

@@ -1,9 +1,9 @@
-package com.drx.epi;
+package com.epi;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.drx.epi.BinaryTreeWithParentPrototype.BinaryTree;
+import static com.epi.BinaryTreeWithParentPrototype.BinaryTree;
 
 /**
  * @author translated from c++ by Blazheev Alexander

@@ -1,4 +1,4 @@
-package com.drx.epi;
+package com.epi;
 
 import java.io.BufferedInputStream;
 import java.io.File;
