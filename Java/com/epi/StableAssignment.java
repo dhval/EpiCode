@@ -1,134 +1,130 @@
 package com.epi;
-import static com.epi.utils.Utils.find;
-import static com.epi.utils.Utils.shuffle;
+
+import com.epi.utils.Pair;
 
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
 
+import static com.epi.utils.Utils.find;
+import static com.epi.utils.Utils.shuffle;
+
 public class StableAssignment {
-	// @include
-	static Pair<Integer, Integer>[] find_stable_assignment(
-			int[][] professor_preference, int[][] student_preference) {
+  // @include
+  public static Pair<Integer, Integer>[] findStableAssignment(
+      int[][] professorPreference, int[][] studentPreference) {
 
-		// stores currently free students.
-		Queue<Integer> free_student = new LinkedList<Integer>();
-		for (int i = 0; i < student_preference.length; ++i) {
-			free_student.add(i);
-		}
+    // stores currently free students.
+    Queue<Integer> freeStudent = new LinkedList<>();
+    for (int i = 0; i < studentPreference.length; ++i) {
+      freeStudent.add(i);
+    }
 
-		// Records the professors that each student have asked.
-		int[] student_pref_idx = new int[student_preference.length];
-		Arrays.fill(student_pref_idx, 0);
-		
-		// Records the current student choice for each professor.
-		int[] professor_choice = new int[professor_preference.length];
-		Arrays.fill(professor_choice, -1);
+    // Records the professors that each student have asked.
+    int[] studentPrefIdx = new int[studentPreference.length];
+    Arrays.fill(studentPrefIdx, 0);
 
-		while (!free_student.isEmpty()) {
-			int i = free_student.element(); // free student.
-			int j = student_preference[i][student_pref_idx[i]]; // target professor.
-			if (professor_choice[j] == -1) { // this professor is free.
-				professor_choice[j] = i;
-				free_student.remove();
-			} else { // this professor has student now.
-				int original_pref = find(professor_preference[j], professor_choice[j]);
-				int new_pref = find(professor_preference[j], i);
-				if (new_pref < original_pref) { // this professor prefers the new one.
-					free_student.add(professor_choice[j]);
-					professor_choice[j] = i;
-					free_student.remove();
-				}
-			}
-			++student_pref_idx[i];
-		}
+    // Records the current student choice for each professor.
+    int[] professorChoice = new int[professorPreference.length];
+    Arrays.fill(professorChoice, -1);
 
-		Pair<Integer, Integer>[] match_result = new Pair[professor_choice.length];
-		for (int j = 0; j < professor_choice.length; ++j) {
-			match_result[j] = new Pair<Integer, Integer>(professor_choice[j], j);
-		}
-		return match_result;
-	}
-	// @exclude
+    while (!freeStudent.isEmpty()) {
+      int i = freeStudent.element(); // free student.
+      int j = studentPreference[i][studentPrefIdx[i]]; // target professor.
+      if (professorChoice[j] == -1) { // this professor is free.
+        professorChoice[j] = i;
+        freeStudent.remove();
+      } else { // this professor has student now.
+        int originalPref = find(professorPreference[j], professorChoice[j]);
+        int newPref = find(professorPreference[j], i);
+        if (newPref < originalPref) { // this professor prefers the new one.
+          freeStudent.add(professorChoice[j]);
+          professorChoice[j] = i;
+          freeStudent.remove();
+        }
+      }
+      ++studentPrefIdx[i];
+    }
 
-	static void check_ans(int[][] professor_preference,
-			int[][] student_preference, Pair<Integer, Integer>[] match_result) {
-	  
-		assert match_result.length == professor_preference.length;
-		
-		boolean[] professor = new boolean[professor_preference.length], 
-				student = new boolean[student_preference.length];
-		
-		for (Pair<Integer, Integer> p : match_result) {
-			student[p.getFirst()] = true;
-			professor[p.getSecond()] = true;
-		}
-		for (boolean p : professor) {
-			assert p;
-		}
-		for (boolean s : student) {
-			assert s;
-		}
+    Pair<Integer, Integer>[] matchResult = new Pair[professorChoice.length];
+    for (int j = 0; j < professorChoice.length; ++j) {
+      matchResult[j] = new Pair<>(professorChoice[j], j);
+    }
+    return matchResult;
+  }
+  // @exclude
 
-		for (int i = 0; i < match_result.length; ++i) {
-			for (int j = i + 1; j < match_result.length; ++j) {
-				int s0 = match_result[i].getFirst(), a0 = match_result[i].getSecond();
-				int s1 = match_result[j].getFirst(), a1 = match_result[j].getSecond();
-				int a0_in_s0_order = find(student_preference[s0], a0);
-				int a1_in_s0_order = find(student_preference[s0], a1);
-				int s0_in_a1_order = find(professor_preference[a1], s0);
-				int s1_in_a1_order = find(professor_preference[a1], s1);
-				assert a0_in_s0_order < a1_in_s0_order
-						|| s1_in_a1_order < s0_in_a1_order;
-	    }
-	  }
-	}
+  static void
+  checkAns(int[][] professor_preference,
+           int[][] student_preference, Pair<Integer, Integer>[] matchResult) {
 
-	public static void main(String[] args) {
-		Random gen = new Random();
-		for (int times = 0; times < 1000; ++times) {
-			int n;
-			if (args.length == 1) {
-				n = Integer.valueOf(args[0]);
-			} else {
-				n = gen.nextInt(300) + 1;
-			}
-			int[][] professor_preference = new int[n][n], student_preference = new int[n][n];
-			for (int i = 0; i < n; ++i) {
-				for (int j = 0; j < n; ++j) {
-					professor_preference[i][j] = j;
-					student_preference[i][j] = j;
-				}
-				shuffle(professor_preference[i]);
-				shuffle(student_preference[i]);
-			}
+    assert matchResult.length == professor_preference.length;
 
-		    /*
-			for (int i = 0; i < n; ++i) {
-				System.out.println("professor " + i);
-				for (int j = 0; j < n; ++j) {
-					System.out.println(professor_preference[i][j] + " ");
-				}
-				System.out.println();
-			}
-			for (int i = 0; i < n; ++i) {
-				System.out.println("student " + i);
-				for (int j = 0; j < n; ++j) {
-					System.out.println(student_preference[i][j] + " ");
-				}
-				System.out.println();
-			}
-		    */
-		    Pair<Integer,Integer>[] res =
-		        find_stable_assignment(professor_preference, student_preference);
-		    
-		    /*
-		    for (int i = 0; i < res.size(); ++i) {
-		    	System.out.println(res.get(i).getFirst() + ", " + res.get(i).getSecond());
-		    }
-		    */
-		    check_ans(professor_preference, student_preference, res);
-		  }
-	}
+    boolean[] professor = new boolean[professor_preference.length];
+    boolean[] student = new boolean[student_preference.length];
+
+    for (Pair<Integer, Integer> p : matchResult) {
+      student[p.getFirst()] = true;
+      professor[p.getSecond()] = true;
+    }
+    for (boolean p : professor) {
+      assert p;
+    }
+    for (boolean s : student) {
+      assert s;
+    }
+
+    for (int i = 0; i < matchResult.length; ++i) {
+      for (int j = i + 1; j < matchResult.length; ++j) {
+        int s0 = matchResult[i].getFirst(), a0 = matchResult[i].getSecond();
+        int s1 = matchResult[j].getFirst(), a1 = matchResult[j].getSecond();
+        int a0InS0Order = find(student_preference[s0], a0);
+        int a1InS0Order = find(student_preference[s0], a1);
+        int s0InA1Order = find(professor_preference[a1], s0);
+        int s1InA1Order = find(professor_preference[a1], s1);
+        assert a0InS0Order < a1InS0Order || s1InA1Order < s0InA1Order;
+      }
+    }
+  }
+
+  public static void main(String[] args) {
+    Random gen = new Random();
+    for (int times = 0; times < 1000; ++times) {
+      int n;
+      if (args.length == 1) {
+        n = Integer.valueOf(args[0]);
+      } else {
+        n = gen.nextInt(300) + 1;
+      }
+      int[][] professorPreference
+          = new int[n][n], studentPreference = new int[n][n];
+      for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n; ++j) {
+          professorPreference[i][j] = j;
+          studentPreference[i][j] = j;
+        }
+        shuffle(professorPreference[i]);
+        shuffle(studentPreference[i]);
+      }
+
+      /*
+       * for (int i = 0; i < n; ++i) { System.out.println("professor " + i); for
+       * (int j = 0; j < n; ++j) { System.out.println(professorPreference[i][j]
+       * + " "); } System.out.println(); } for (int i = 0; i < n; ++i) {
+       * System.out.println("student " + i); for (int j = 0; j < n; ++j) {
+       * System.out.println(studentPreference[i][j] + " "); }
+       * System.out.println(); }
+       */
+      Pair<Integer, Integer>[] res = findStableAssignment(professorPreference,
+          studentPreference);
+
+      /*
+       * for (int i = 0; i < res.size(); ++i) {
+       * System.out.println(res.get(i).getFirst() + ", " +
+       * res.get(i).getSecond()); }
+       */
+      checkAns(professorPreference, studentPreference, res);
+    }
+  }
 }

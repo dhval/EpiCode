@@ -5,31 +5,31 @@ package com.epi;
 
 import java.util.Arrays;
 
-class Can_string_be_a_palindrome_sorting { 
+class CanStringBePalindromeSorting {
   // @include
-  public static boolean can_string_be_a_palindrome_sorting(String s) {
+  public static boolean canStringBeAPalindrome(String s) {
     char[] a = s.toCharArray();
     Arrays.sort(a);
-    int odd_count = 0;
-    int num_curr_char = 1;
+    int oddCount = 0;
+    int numCurrChar = 1;
 
-    for (int i = 1; i < a.length && odd_count <= 1; ++i) {
+    for (int i = 1; i < a.length && oddCount <= 1; ++i) {
       if (a[i] != a[i - 1]) {
-        if ((num_curr_char & 1) != 0) {
-          ++odd_count;
+        if ((numCurrChar & 1) != 0) {
+          ++oddCount;
         }
-        num_curr_char = 1;
+        numCurrChar = 1;
       } else {
-        ++num_curr_char;
+        ++numCurrChar;
       }
     }
-    if ((num_curr_char & 1) != 0) {
-      ++odd_count;
+    if ((numCurrChar & 1) != 0) {
+      ++oddCount;
     }
 
     // A string can be permuted as a palindrome if the number of odd time
     // chars <= 1.
-    return odd_count <= 1;
+    return oddCount <= 1;
   }
   // @exclude
 }

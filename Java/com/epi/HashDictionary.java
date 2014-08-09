@@ -6,18 +6,18 @@ package com.epi;
 import java.util.Random;
 
 class HashDictionary {
-  private static String rand_string(int len) {
+  private static String randString(int len) {
     StringBuilder ret = new StringBuilder();
     Random rnd = new Random();
 
     while (len-- > 0) {
-      ret.append((char)(rnd.nextInt(26) + 97));
+      ret.append((char) (rnd.nextInt(26) + 97));
     }
     return ret.toString();
   }
 
   // @include
-  public static int string_hash(String str, int modulus) {
+  public static int stringHash(String str, int modulus) {
     int kMult = 997;
     int val = 0;
     for (char c : str.toCharArray()) {
@@ -33,9 +33,9 @@ class HashDictionary {
       str = args[0];
     } else {
       Random rnd = new Random();
-      str = rand_string(rnd.nextInt(20) + 1);
+      str = randString(rnd.nextInt(20) + 1);
     }
     System.out.println("string = " + str);
-    System.out.println(string_hash(str, 1 << 16));
+    System.out.println(stringHash(str, 1 << 16));
   }
 }

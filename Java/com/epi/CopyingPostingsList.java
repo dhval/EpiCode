@@ -5,26 +5,25 @@ package com.epi;
 
 import java.util.Random;
 
-//@include
 class CopyingPostingsList {
 
   // @include
-  public static <T> pnode_t<T> copy_postings_list(pnode_t<T> L) {
-    // Return empty list if L is nullptr.
-    if (L == null) {
+  public static PNode<Integer> copyPostingsList(PNode<Integer> l) {
+    // Return empty list if l is nullptr.
+    if (l == null) {
       return null;
     }
 
-    // 1st stage: Copy the nodes from L.
-    pnode_t<T> p = L;
+    // 1st stage: Copy the nodes from l.
+    PNode<Integer> p = l;
     while (p != null) {
-      pnode_t<T> temp = new pnode_t<T>(p.data, p.next, null);
+      PNode<Integer> temp = new PNode<>(p.data, p.next, null);
       p.next = temp;
       p = temp.next;
     }
 
     // 2nd stage: Update the jump field.
-    p = L;
+    p = l;
     while (p != null) {
       if (p.jump != null) {
         p.next.jump = p.jump.next;
@@ -33,49 +32,48 @@ class CopyingPostingsList {
     }
 
     // 3rd stage: Restore the next field.
-    p = L;
-    pnode_t<T> copied = p.next;
+    p = l;
+    PNode<Integer> copied = p.next;
     while (p.next != null) {
-      pnode_t<T> temp = p.next;
+      PNode<Integer> temp = p.next;
       p.next = temp.next;
       p = temp;
     }
     return copied;
   }
-
   // @exclude
-  public static <T> void check_postings_list_equal(pnode_t<T> a, pnode_t<T> b) {
+
+  public static <T> void checkPostingsListEqual(PNode<T> a, PNode<T> b) {
     while (a != null && b != null) {
       System.out.print(a.data + " ");
-      assert(a.data == b.data);
-      assert(a.jump == null &&
-              b.jump == null ||
-             (a.jump != null && b.jump != null && a.jump.data == b.jump.data));
+      assert (a.data == b.data);
+      assert (a.jump == null && b.jump == null || (a.jump != null
+          && b.jump != null && a.jump.data == b.jump.data));
       if (a.jump != null) {
         System.out.print(a.jump.data);
       }
       System.out.println("");
-      a = a.next; b = b.next;
+      a = a.next;
+      b = b.next;
     }
 
-    assert(a == null &&
-           b == null);
+    assert (a == null && b == null);
   }
 
-  public static void main(String[] argv) {
+  public static void main(String[] args) {
     Random gen = new Random();
     for (int times = 0; times < 1000; ++times) {
       int n;
-      if (argv.length == 1) {
-        n = Integer.parseInt(argv[0]);
+      if (args.length == 1) {
+        n = Integer.parseInt(args[0]);
       } else {
         n = gen.nextInt(1000) + 1;
       }
 
-      pnode_t<Integer> L = null;
-      pnode_t<Integer> curr = L;
+      PNode<Integer> L = null;
+      PNode<Integer> curr = L;
       for (int i = 0; i < n; ++i) {
-        pnode_t<Integer> temp = new pnode_t<Integer>(i, null, null);
+        PNode<Integer> temp = new PNode<>(i, null, null);
         if (L != null) {
           curr.next = temp;
           curr = temp;
@@ -84,16 +82,16 @@ class CopyingPostingsList {
         }
 
         // Randomly assigned a jump node.
-        int jump_num = (i > 0)?gen.nextInt(i):0;
-        pnode_t<Integer> jump = L;
-        while (jump_num-- != 0) {
+        int jumpNum = (i > 0) ? gen.nextInt(i) : 0;
+        PNode<Integer> jump = L;
+        while (jumpNum-- != 0) {
           jump = jump.next;
         }
         temp.jump = jump;
       }
 
-      pnode_t<Integer> copied = copy_postings_list(L);
-      check_postings_list_equal(L, copied);
+      PNode<Integer> copied = copyPostingsList(L);
+      checkPostingsListEqual(L, copied);
     }
   }
 }

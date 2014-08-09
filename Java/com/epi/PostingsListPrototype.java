@@ -2,16 +2,13 @@
 
 package com.epi;
 
-// @include
-class pnode_t<T> {
+class PNode<T> {
   public T data;
-  public pnode_t<T> next, jump;
+  public PNode<T> next, jump;
 
-  pnode_t(T dt, pnode_t<T> n, pnode_t<T> j) {
+  PNode(T dt, PNode<T> n, PNode<T> j) {
     data = dt;
     next = n;
     jump = j;
   }
 }
-//@exclude
-

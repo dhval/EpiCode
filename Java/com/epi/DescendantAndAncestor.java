@@ -1,71 +1,75 @@
 package com.epi;
 
-import static com.epi.BinaryTreePrototypeTemplate.BinaryTree;
+import com.epi.BinaryTreePrototypeTemplate.BinaryTree;
 
 /**
  * @author translated from c++ by Blazheev Alexander
  */
 public class DescendantAndAncestor {
-    // @include
-    public static <T extends Comparable<T>> boolean is_r_s_descendant_ancestor_of_m(
-            BinaryTree<T> r,
-            BinaryTree<T> s,
-            BinaryTree<T> m) {
-        BinaryTree<T> cur_r = r;
-        BinaryTree<T> cur_s = s;
+  // @include
+  public static boolean isRSDescendantAncestorOfM(
+      BinaryTree<Integer> r, BinaryTree<Integer> s, BinaryTree<Integer> m) {
+    BinaryTree<Integer> curR = r;
+    BinaryTree<Integer> curS = s;
 
-        // Interleaving searches from r and s.
-        while (cur_r != null && cur_r != s && cur_s != null && cur_s != r) {
-            if (cur_r == m || cur_s == m) {
-                return true;
-            }
-            cur_r = cur_r.getData().compareTo(s.getData()) > 0 ? cur_r.getLeft() : cur_r.getRight();
-            cur_s = cur_s.getData().compareTo(r.getData()) > 0 ? cur_s.getLeft() : cur_s.getRight();
-        }
-
-        // Reach the other before reaching m.
-        if (cur_r == s || cur_s == r) {
-            return false;
-        }
-        // Try to search m before reaching the other.
-        return search_m_before_t(cur_r, s, m) || search_m_before_t(cur_s, r, m);
+    // Interleaving searches from r and s.
+    while (curR != null && curR != s && curS != null && curS != r) {
+      if (curR == m || curS == m) {
+        return true;
+      }
+      curR = curR.getData().compareTo(s.getData()) > 0 ? curR.getLeft() : curR
+          .getRight();
+      curS = curS.getData().compareTo(r.getData()) > 0 ? curS.getLeft() : curS
+          .getRight();
     }
 
-    private static <T extends Comparable<T>> boolean search_m_before_t(BinaryTree<T> p,
-                           BinaryTree<T> t,
-                           BinaryTree<T> m) {
-        while (p != null && p != t && p != m) {
-            p = p.getData().compareTo(t.getData()) > 0 ? p.getLeft() : p.getRight();
-        }
-        return p == m;
+    // Reach the other before reaching m.
+    if (curR == s || curS == r) {
+      return false;
     }
-    // @exclude
+    // Try to search m before reaching the other.
+    return searchMBeforeT(curR, s, m) || searchMBeforeT(curS, r, m);
+  }
 
-    private static void small_test() {
-        BinaryTree<Integer> root = new BinaryTree<Integer>(5);
-        root.setLeft(new BinaryTree<Integer>(2));
-        root.getLeft().setRight(new BinaryTree<Integer>(4));
-        assert(!is_r_s_descendant_ancestor_of_m(root, root.getLeft(), root.getLeft().getRight()));
+  private static boolean searchMBeforeT(
+      BinaryTree<Integer> p, BinaryTree<Integer> t, BinaryTree<Integer> m) {
+    while (p != null && p != t && p != m) {
+      p = p.getData().compareTo(t.getData()) > 0 ? p.getLeft() : p.getRight();
     }
+    return p == m;
+  }
+  // @exclude
 
-    public static void main(String[] args) {
-        small_test();
-        //      3
-        //    2   5
-        //  1    4 6
-        BinaryTree<Integer> root = new BinaryTree<Integer>(3);
-        root.setLeft(new BinaryTree<Integer>(2));
-        root.getLeft().setLeft(new BinaryTree<Integer>(1));
-        root.setRight(new BinaryTree<Integer>(5));
-        root.getRight().setLeft(new BinaryTree<Integer>(4));
-        root.getRight().setRight(new BinaryTree<Integer>(6));
-        assert(is_r_s_descendant_ancestor_of_m(root, root.getRight().getRight(), root.getRight()));
-        assert(is_r_s_descendant_ancestor_of_m(root.getRight().getRight(), root, root.getRight()));
-        assert(!is_r_s_descendant_ancestor_of_m(root, root.getRight(), root.getRight().getRight()));
-        assert(!is_r_s_descendant_ancestor_of_m(root.getRight(), root, root.getRight().getRight()));
-        assert(!is_r_s_descendant_ancestor_of_m(
-                root.getRight().getLeft(), root.getRight().getRight(), root.getRight()));
-        assert(!is_r_s_descendant_ancestor_of_m(
-                root.getRight().getLeft(), root.getLeft().getLeft(), root.getRight()));
-    }
+  private static void smallTest() {
+    BinaryTree<Integer> root = new BinaryTree<>(5);
+    root.setLeft(new BinaryTree<>(2));
+    root.getLeft().setRight(new BinaryTree<>(4));
+    assert (!isRSDescendantAncestorOfM(root, root.getLeft(), root.getLeft()
+        .getRight()));
+  }
+
+  public static void main(String[] args) {
+    smallTest();
+    // 3
+    // 2 5
+    // 1 4 6
+    BinaryTree<Integer> root = new BinaryTree<>(3);
+    root.setLeft(new BinaryTree<>(2));
+    root.getLeft().setLeft(new BinaryTree<>(1));
+    root.setRight(new BinaryTree<>(5));
+    root.getRight().setLeft(new BinaryTree<>(4));
+    root.getRight().setRight(new BinaryTree<>(6));
+    assert (isRSDescendantAncestorOfM(root, root.getRight().getRight(),
+        root.getRight()));
+    assert (isRSDescendantAncestorOfM(root.getRight().getRight(), root,
+        root.getRight()));
+    assert (!isRSDescendantAncestorOfM(root, root.getRight(), root.getRight()
+        .getRight()));
+    assert (!isRSDescendantAncestorOfM(root.getRight(), root, root.getRight()
+        .getRight()));
+    assert (!isRSDescendantAncestorOfM(root.getRight().getLeft(), root
+        .getRight().getRight(), root.getRight()));
+    assert (!isRSDescendantAncestorOfM(root.getRight().getLeft(), root
+        .getLeft().getLeft(), root.getRight()));
+  }
 }

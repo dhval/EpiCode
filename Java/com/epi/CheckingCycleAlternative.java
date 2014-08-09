@@ -3,17 +3,17 @@
 
 package com.epi;
 
-// @include
 class CheckingCycleAlternative {
-  public static <T> node_t<T> has_cycle(node_t<T> head) {
-    node_t<T> fast = head;
-    node_t<T> slow = head;
+  // @include
+  public static Node<Integer> hasCycle(Node<Integer> head) {
+    Node<Integer> fast = head;
+    Node<Integer> slow = head;
 
-    while (slow != null && slow.next != null && fast != null 
-                        && fast.next != null && fast.next.next != null) {
+    while (slow != null && slow.next != null && fast != null
+        && fast.next != null && fast.next.next != null) {
       slow = slow.next;
       fast = fast.next.next;
-      if (slow == fast) {  // there is a cycle.
+      if (slow == fast) { // There is a cycle.
         // Tries to find the start of the cycle.
         slow = head;
         // Both pointers advance at the same time.
@@ -21,34 +21,34 @@ class CheckingCycleAlternative {
           slow = slow.next;
           fast = fast.next;
         }
-        return slow;  // slow is the start of cycle.
+        return slow; // slow is the start of cycle.
       }
     }
-    return null;  // means no cycle.
+    return null; // No cycle.
   }
   // @exclude
 
   public static void main(String[] args) {
-    node_t<Integer> L3 = new node_t<Integer>(3, null);
-    node_t<Integer> L2 = new node_t<Integer>(2, L3);
-    node_t<Integer> L1 = new node_t<Integer>(1, L2);
+    Node<Integer> l3 = new Node<>(3, null);
+    Node<Integer> l2 = new Node<>(2, l3);
+    Node<Integer> l1 = new Node<>(1, l2);
 
-    // should output "L1 does not have cycle."
-    assert(has_cycle(L1) == null);
-    System.out.println("L1 " 
-            + (has_cycle(L1) != null ? "has" : "does not have") + " cycle.");
+    // should output "l1 does not have cycle."
+    assert (hasCycle(l1) == null);
+    System.out.println("l1 " + (hasCycle(l1) != null ? "has" : "does not have")
+        + " cycle.");
 
     // make it a cycle
-    L3.next = L2;
-    // should output "L1 has cycle, located at node has value 2"
-    assert(has_cycle(L1) != null);
-    assert(has_cycle(L1).data == 2);
-    node_t<Integer> temp = has_cycle(L1);
+    l3.next = l2;
+    // should output "l1 has cycle, located at node has value 2"
+    assert (hasCycle(l1) != null);
+    assert (hasCycle(l1).data == 2);
+    Node<Integer> temp = hasCycle(l1);
     if (temp != null) {
-      System.out.println("L1 has cycle, located at node has value " 
-              + temp.data);
+      System.out
+          .println("l1 has cycle, located at node has value " + temp.data);
     } else {
-      System.out.println("L1 does not have cycle");
+      System.out.println("l1 does not have cycle");
     }
   }
 }

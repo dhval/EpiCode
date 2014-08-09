@@ -1,63 +1,69 @@
 package com.epi;
 
-import static com.epi.DoublyLinkedListPrototypeTemplate.NodeT;
+import com.epi.DoublyLinkedListPrototypeTemplate.NodeT;
 
 /**
  * @author translated from c++ by Blazheev Alexander
  */
 public class SortedListToBST {
-    // @include
-    // Build a BST from the (s + 1)-th to the e-th node in L.
-    // Node numbering is from 1 to n.
-    private static <T> NodeT<T> build_BST_from_sorted_doubly_list_helper(
-            ObjectWrapper<NodeT<T>> L,
-            int s,
-            int e) {
-        NodeT<T> curr = null;
-        if (s < e) {
-            int m = s + ((e - s) >> 1);
-            NodeT<T> temp_left = build_BST_from_sorted_doubly_list_helper(L, s, m);
-            curr = new NodeT<T>(L.get().getData());  // the last function call sets L to the successor of the
-            // maximum node in the tree rooted at temp_left.
-            L.set(L.get().getNext());
-            curr.setPrev(temp_left);
-            curr.setNext(build_BST_from_sorted_doubly_list_helper(L, m + 1, e));
-        }
-        return curr;
+  // @include
+  private static NodeT<Integer> head;
+
+  // Returns the root of the corresponding BST. The prev and next
+  // fields of the list nodes are used as the BST nodes left and right fields.
+  public static NodeT<Integer> buildBSTFromSortedDoublyLinkedList(
+      NodeT<Integer> L, int n) {
+    head = L;
+    return buildSortedDoublyLinkedListHelper(0, n);
+  }
+
+  // Builds a BST from the (s + 1)-th to the e-th node in L, and returns the
+  // root. Node numbering is from 1 to n.
+  private static NodeT<Integer> buildSortedDoublyLinkedListHelper(int s,
+                                                                  int e) {
+    if (s >= e) {
+      return null;
     }
 
-    public static <T> NodeT<T> build_BST_from_sorted_doubly_list(
-            NodeT<T> L,
-            int n) {
-        return build_BST_from_sorted_doubly_list_helper(new ObjectWrapper<NodeT<T>>(L), 0, n);
-    }
-    // @exclude
+    int m = s + ((e - s) / 2);
+    NodeT<Integer> left = buildSortedDoublyLinkedListHelper(s, m);
+    // The last function call sets L to the successor of the maximum node in
+    // the tree rooted at left.
+    NodeT<Integer> curr = new NodeT<>(head.getData());
+    head = head.getNext();
+    curr.setPrev(left);
+    curr.setNext(buildSortedDoublyLinkedListHelper(m + 1, e));
+    return curr;
+  }
+  // @exclude
 
-    private static <T extends Comparable<T>> void inorder_traversal(NodeT<T> node, T pre, int depth) {
-        if (node != null) {
-            inorder_traversal(node.getPrev(), pre, depth + 1);
-            assert(pre.compareTo(node.getData()) <= 0);
-            System.out.println(node.getData() + " ; depth = " + depth);
-            inorder_traversal(node.getNext(), node.getData(), depth + 1);
-        }
+  private static <T extends Comparable<T>>
+  void inOrderTraversal(NodeT<T> node,
+                        T pre, int depth) {
+    if (node != null) {
+      inOrderTraversal(node.getPrev(), pre, depth + 1);
+      assert (pre.compareTo(node.getData()) <= 0);
+      System.out.println(node.getData() + " ; depth = " + depth);
+      inOrderTraversal(node.getNext(), node.getData(), depth + 1);
     }
+  }
 
-    public static void main(String[] args) {
-        NodeT<Integer> temp0 = new NodeT<Integer>(0);
-        NodeT<Integer> temp1 = new NodeT<Integer>(1);
-        NodeT<Integer> temp2 = new NodeT<Integer>(2);
-        NodeT<Integer> temp3 = new NodeT<Integer>(3);
-        temp0.setNext(temp1);
-        temp1.setNext(temp2);
-        temp2.setNext(temp3);
-        temp3.setNext(null);
-        temp0.setPrev(null);
-        temp1.setPrev(temp0);
-        temp2.setPrev(temp1);
-        temp3.setPrev(temp2);
+  public static void main(String[] args) {
+    NodeT<Integer> temp0 = new NodeT<>(0);
+    NodeT<Integer> temp1 = new NodeT<>(1);
+    NodeT<Integer> temp2 = new NodeT<>(2);
+    NodeT<Integer> temp3 = new NodeT<>(3);
+    temp0.setNext(temp1);
+    temp1.setNext(temp2);
+    temp2.setNext(temp3);
+    temp3.setNext(null);
+    temp0.setPrev(null);
+    temp1.setPrev(temp0);
+    temp2.setPrev(temp1);
+    temp3.setPrev(temp2);
 
-        NodeT<Integer> L = temp0;
-        NodeT<Integer> root = build_BST_from_sorted_doubly_list(L, 4);
-        inorder_traversal(root, -1, 0);
-    }
+    NodeT<Integer> L = temp0;
+    NodeT<Integer> root = buildBSTFromSortedDoublyLinkedList(L, 4);
+    inOrderTraversal(root, -1, 0);
+  }
 }

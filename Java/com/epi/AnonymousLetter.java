@@ -3,32 +3,34 @@
 
 package com.epi;
 
-import java.util.Random;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 class AnonymousLetter {
-  private static String rand_string(int len) {
+  private static String randString(int len) {
     StringBuilder ret = new StringBuilder();
     Random rnd = new Random();
 
     while (len-- > 0) {
-      ret.append((char)(rnd.nextInt(26) + 97));
+      ret.append((char) (rnd.nextInt(26) + 97));
     }
     return ret.toString();
   }
 
   // @include
-  public static boolean anonymous_letter(String L, String M) {
-    HashMap<Character, Integer> hash = new HashMap<Character, Integer>();
-    // Insert all chars in L into a hash table.
+  public static boolean anonymousLetter(String L, String M) {
+    Map<Character, Integer> hash = new HashMap<>();
+    // Inserts all chars in L into a hash table.
     for (char c : L.toCharArray()) {
-      if (!hash.containsKey(c))
+      if (!hash.containsKey(c)) {
         hash.put(c, 1);
-      else
+      } else {
         hash.put(c, hash.get(c) + 1);
+      }
     }
 
-    // Check chars in M that could cover chars in a hash table.
+    // Checks characters in M that could cover characters in a hash table.
     for (char c : M.toCharArray()) {
       if (hash.containsKey(c)) {
         hash.put(c, hash.get(c) - 1);
@@ -53,15 +55,15 @@ class AnonymousLetter {
       M = args[1];
     } else {
       Random rnd = new Random();
-      L = rand_string(rnd.nextInt(1000) + 1);
-      M = rand_string(rnd.nextInt(100000) + 1);
+      L = randString(rnd.nextInt(1000) + 1);
+      M = randString(rnd.nextInt(100000) + 1);
     }
     System.out.println(L);
     System.out.println(M);
-    assert(!anonymous_letter("123", "456"));
-    assert(!anonymous_letter("123", "12222222"));
-    assert(anonymous_letter("123", "1123"));
-    assert(anonymous_letter("123", "123"));
-    System.out.println(anonymous_letter(L, M) ? "true" : "false");
+    assert (!anonymousLetter("123", "456"));
+    assert (!anonymousLetter("123", "12222222"));
+    assert (anonymousLetter("123", "1123"));
+    assert (anonymousLetter("123", "123"));
+    System.out.println(anonymousLetter(L, M) ? "true" : "false");
   }
 }

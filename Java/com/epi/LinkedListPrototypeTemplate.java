@@ -4,13 +4,13 @@
 package com.epi;
 
 // @include
-class node_t<T> {
+class Node<T> {
   public T data;
-  public node_t<T> next;
+  public Node<T> next;
 
-  node_t(T dt, node_t<T> n) {
-    data = dt;
-    next = n;
+  Node(T data, Node<T> next) {
+    this.data = data;
+    this.next = next;
   }
-};
+}
 // @exclude
